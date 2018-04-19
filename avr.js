@@ -1,0 +1,1 @@
+../HomeAutomation/resources/avr/HK171s/avr.js
