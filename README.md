@@ -10,7 +10,7 @@ Info:
 Todo's:
 
           - Full Test
-          - search firmware
+          - search firmware for HK avr 171s
           - Check commands : Ipod, Spotify, Component
 
 
@@ -71,7 +71,7 @@ Todo's:
   Dependency:
   
 
-    - independent (only Node.js Built-in Modules)
+    - independent (only Node.js Built-in Modules) : net
 
 ***
 
