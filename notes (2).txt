@@ -1,0 +1,195 @@
+root@raspberrypi:~# cat sat.js
+var net = require('net');
+
+var HOST = '192.168.3.22';
+var PORT = 10025;
+
+function buildRequest(cmd, zone, param) {
+   var text = '';
+   var payload = '<?xml version="1.0" encoding="UTF-8"?> <harman> <avr> <common> <control> <name>source-selection</name> <zone>Main Zone</zone> <para>Cable Sat</para> </control> </common> </avr> </harman>';
+   zone = zone || 'Main Zone';
+   param = param || ''
+   text += 'POST HK_APP HTTP/1.1\r\n';
+   text += 'Host: :' + PORT + '\r\n';
+   text += 'User-Agent: Harman Kardon BDS Remote Controller/1.0\r\n';
+   text += 'Content-Length: ' + payload.length + '\r\n';
+   text += '\r\n';
+   text += payload;
+   return text;
+}
+
+var client = new net.Socket();
+client.connect(PORT, HOST, function() {
+    console.log('CONNECTED TO: ' + HOST + ':' + PORT);
+    client.write(buildRequest('mute-on'));
+	    client.destroy();   
+
+});
+root@raspberrypi:~# 
+
+
+
+
+
+****************************************************************************************************
+
+
+
+
+root@raspberrypi:~# cat sourcea.js 
+var net = require('net');
+
+var HOST = '192.168.3.22';
+var PORT = 10025;
+
+// Supported commands:
+// volume-down
+// mute-on
+// source-selection (param is used: Component, DISC)
+// Play
+
+function buildRequest(cmd, zone, param) {
+   var text = '';
+   var payload = '<?xml version="1.0" encoding="UTF-8"?> <harman> <avr> <common> <control> <name>source-selection</name> <zone>Main Zone</zone> <para>Source A</para> </control> </common> </avr> </harman>';
+   zone = zone || 'Main Zone';
+   param = param || ''
+   text += 'POST HK_APP HTTP/1.1\r\n';
+   text += 'Host: :' + PORT + '\r\n';
+   text += 'User-Agent: Harman Kardon BDS Remote Controller/1.0\r\n';
+   text += 'Content-Length: ' + payload.length + '\r\n';
+   text += '\r\n';
+   text += payload;
+   return text;
+}
+
+var client = new net.Socket();
+client.connect(PORT, HOST, function() {
+    console.log('CONNECTED TO: ' + HOST + ':' + PORT);
+    client.write(buildRequest('mute-on'));
+    client.destroy();   
+});
+
+
+****************************************************************************************************
+
+POST AVR HTTP/1.1
+Host::10025
+User-Agent:Harman Kardon AVR Controller/1.0
+Content-Length:185
+<?xml version="1.0" encoding="UTF-8"?> <harman> <avr> <common> <control> <name>source-selection</name> <zone>Main Zone</zone> <para>Source A</para> </control> </common> </avr> </harman>
+
+****************************************************************************************************
+
+POST AVR HTTP/1.1
+Host::10025
+User-Agent:Harman Kardon AVR Controller/1.0
+Content-Length:186
+<?xml version="1.0" encoding="UTF-8"?> <harman> <avr> <common> <control> <name>source-selection</name> <zone>Main Zone</zone> <para>Cable Sat</para> </control> </common> </avr> </harman>
+
+****************************************************************************************************
+
+CODE: ALLES AUSWÄHLEN
+POST HK_APP HTTP/1.1
+Host: :10025
+User-Agent: Harman Kardon BDS Remote Controller/1.0
+Content-Length: 163
+
+<?xml version="1.0" encoding="UTF-8"?> <harman> <bds> <common> <control> <name>heart-alive</name> <zone></zone> <para></para> </control> </common> </bds> </harman>
+
+POST HK_APP HTTP/1.1
+Host: 192.168.178.24:10025
+User-Agent: Harman Kardon BDS G3 /1
+Content-Length: 150
+
+<?xml version="1.0" encoding="UTF-8"?><harman><bds><common><status><name>heart-alive</name><zone></zone><para></para></status></common></bds></harman>
+
+POST HK_APP HTTP/1.1
+Host: :10025
+User-Agent: Harman Kardon BDS Remote Controller/1.0
+Content-Length: 172
+
+<?xml version="1.0" encoding="UTF-8"?> <harman> <bds> <common> <control> <name>volume-down</name> <zone>Main Zone</zone> <para></para> </control> </common> </bds> </harman>
+
+****************************************************************************************************
+
+var net = require('net');
+
+var HOST = '192.168.178.24';
+var PORT = 10025;
+
+// Supported commands:
+// volume-down
+// mute-on
+// source-selection (param is used: Component, DISC)
+// Play
+
+function buildRequest(cmd, zone, param) {
+   var text = '';
+   var payload = '<?xml version="1.0" encoding="UTF-8"?> <harman> <bds> <common> <control> <name>' + cmd + '</name> <zone>' + zone + '</zone> <para>' + param + '</para> </control> </common> </bds> </harman>';
+   zone = zone || 'Main Zone';
+   param = param || ''
+   text += 'POST HK_APP HTTP/1.1\r\n';
+   text += 'Host: :' + PORT + '\r\n';
+   text += 'User-Agent: Harman Kardon BDS Remote Controller/1.0\r\n';
+   text += 'Content-Length: ' + payload.length + '\r\n';
+   text += '\r\n';
+   text += payload;
+   return text;
+}
+
+var client = new net.Socket();
+client.connect(PORT, HOST, function() {
+    console.log('CONNECTED TO: ' + HOST + ':' + PORT);
+    client.write(buildRequest('mute-on'));
+});
+
+// Add a 'data' event handler for the client socket
+// data is what the server sent to this socket
+client.on('data', function(data) {
+    console.log('DATA: ' + data);
+    // Close the client socket completely
+    client.destroy();   
+});
+
+// Add a 'close' event handler for the client socket
+client.on('close', function() {
+    console.log('Connection closed');
+});
+
+************************************************************************************************************
+
+<?xml version="1.0" encoding="UTF-8"?> <harman> <bds> <common> <control> <name>Back</name> <zone>Main Zone</zone> <para></para> </control> </common> </bds> </harman>
+<?xml version="1.0" encoding="UTF-8"?> <harman> <bds> <common> <control> <name>bye-bye</name> <zone></zone> <para></para> </control> </common> </bds> </harman>
+<?xml version="1.0" encoding="UTF-8"?> <harman> <bds> <common> <control> <name>Down</name> <zone>Main Zone</zone> <para></para> </control> </common> </bds> </harman>
+<?xml version="1.0" encoding="UTF-8"?> <harman> <bds> <common> <control> <name>eject</name> <zone>Main Zone</zone> <para></para> </control> </common> </bds> </harman>
+<?xml version="1.0" encoding="UTF-8"?> <harman> <bds> <common> <control> <name>heart-alive</name> <zone></zone> <para></para> </control> </common> </bds> </harman>
+<?xml version="1.0" encoding="UTF-8"?> <harman> <bds> <common> <control> <name>Home</name> <zone>Main Zone</zone> <para></para> </control> </common> </bds> </harman>
+<?xml version="1.0" encoding="UTF-8"?> <harman> <bds> <common> <control> <name>keyboard</name> <zone>Main Zone</zone> <para></para> </control> </common> </bds> </harman>
+<?xml version="1.0" encoding="UTF-8"?> <harman> <bds> <common> <control> <name>Left</name> <zone>Main Zone</zone> <para></para> </control> </common> </bds> </harman>
+<?xml version="1.0" encoding="UTF-8"?> <harman> <bds> <common> <control> <name>Ok</name> <zone>Main Zone</zone> <para></para> </control> </common> </bds> </harman>
+<?xml version="1.0" encoding="UTF-8"?> <harman> <bds> <common> <control> <name>Options</name> <zone>Main Zone</zone> <para></para> </control> </common> </bds> </harman>
+<?xml version="1.0" encoding="UTF-8"?> <harman> <bds> <common> <control> <name>popup</name> <zone>display</zone> <para></para> </control> </common> </bds> </harman>
+<?xml version="1.0" encoding="UTF-8"?> <harman> <bds> <common> <control> <name>Program</name> <zone>Main Zone</zone> <para></para> </control> </common> </bds> </harman>
+<?xml version="1.0" encoding="UTF-8"?> <harman> <bds> <common> <control> <name>Right</name> <zone>Main Zone</zone> <para></para> </control> </common> </bds> </harman>
+<?xml version="1.0" encoding="UTF-8"?> <harman> <bds> <common> <control> <name>sleep</name> <zone>Main Zone</zone> <para></para> </control> </common> </bds> </harman>
+<?xml version="1.0" encoding="UTF-8"?> <harman> <bds> <common> <control> <name>source-selection</name> <zone>Main Zone</zone> <para>AUX</para> </control> </common> </bds> </harman>
+<?xml version="1.0" encoding="UTF-8"?> <harman> <bds> <common> <control> <name>source-selection</name> <zone>Main Zone</zone> <para>Bluetooth</para> </control> </common> </bds> </harman>
+<?xml version="1.0" encoding="UTF-8"?> <harman> <bds> <common> <control> <name>source-selection</name> <zone>Main Zone</zone> <para>Component</para> </control> </common> </bds> </harman>
+<?xml version="1.0" encoding="UTF-8"?> <harman> <bds> <common> <control> <name>source-selection</name> <zone>Main Zone</zone> <para>DISC</para> </control> </common> </bds> </harman>
+<?xml version="1.0" encoding="UTF-8"?> <harman> <bds> <common> <control> <name>source-selection</name> <zone>Main Zone</zone> <para>HDMI1</para> </control> </common> </bds> </harman>
+<?xml version="1.0" encoding="UTF-8"?> <harman> <bds> <common> <control> <name>source-selection</name> <zone>Main Zone</zone> <para>HDMI2</para> </control> </common> </bds> </harman>
+<?xml version="1.0" encoding="UTF-8"?> <harman> <bds> <common> <control> <name>source-selection</name> <zone>Main Zone</zone> <para>HDMI3</para> </control> </common> </bds> </harman>
+<?xml version="1.0" encoding="UTF-8"?> <harman> <bds> <common> <control> <name>source-selection</name> <zone>Main Zone</zone> <para>Picasa</para> </control> </common> </bds> </harman>
+<?xml version="1.0" encoding="UTF-8"?> <harman> <bds> <common> <control> <name>source-selection</name> <zone>Main Zone</zone> <para>Radio</para> </control> </common> </bds> </harman>
+<?xml version="1.0" encoding="UTF-8"?> <harman> <bds> <common> <control> <name>source-selection</name> <zone>Main Zone</zone> <para>USB</para> </control> </common> </bds> </harman>
+<?xml version="1.0" encoding="UTF-8"?> <harman> <bds> <common> <control> <name>source-selection</name> <zone>Main Zone</zone> <para>YouTube</para> </control> </common> </bds> </harman>
+<?xml version="1.0" encoding="UTF-8"?> <harman> <bds> <common> <control> <name>thumbnail</name> <zone>Main Zone</zone> <para></para> </control> </common> </bds> </harman>
+<?xml version="1.0" encoding="UTF-8"?> <harman> <bds> <common> <control> <name>Up</name> <zone>Main Zone</zone> <para></para> </control> </common> </bds> </harman>
+<?xml version="1.0" encoding="UTF-8"?> <harman> <bds> <common> <control> <name>zoom</name> <zone>Main Zone</zone> <para></para> </control> </common> </bds> </harman>
+<?xml version="1.0" encoding="UTF-8"?><harman><bds><common><status><name>heart-alive</name><zone></zone><para></para></status></common></bds></harman>
+
+************************************************************************************************************
+
+
+
+

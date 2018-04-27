@@ -1,0 +1,60 @@
+BODY
+{
+    FONT-SIZE: 10pt;
+    FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+}
+TD
+{
+    FONT-SIZE: 10pt;
+    FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+TR
+{
+    FONT-SIZE: 10pt;
+    FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+A
+{
+	FONT-SIZE: 10pt;
+	FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+	color: #000000;
+	text-decoration: none;
+}
+A:hover 
+{ 
+	color: #ff0000; 
+	text-decoration: none
+}
+FONT
+{
+    FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.toptable
+{
+	position:absolute;
+	left:0px;
+	top:0px;
+}
+.maintable
+{
+	position:absolute;
+	left:0px;
+	top:0px;
+}
+.menutable
+{
+	position:absolute;
+	top:0px;
+	background-color: #000000;
+	border: #FFFFFF;
+}
+.scrollbar_black 
+{ 
+	scrollbar-3dlight-color: #666666; 
+	scrollbar-arrow-color: #666666; 
+	scrollbar-darkshadow-color: #000000; 
+	scrollbar-face-color: #000000; 
+	scrollbar-highlight-color: #333333; 
+	scrollbar-shadow-color: #666666; 
+	scrollbar-track-color: #000000 
+}
