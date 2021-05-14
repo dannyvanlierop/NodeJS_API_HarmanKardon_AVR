@@ -1,8 +1,48 @@
-# HarmanKardonAVR-API
+# NodeJS_HarmanKardon-AVR-API
+Remote control Philips SmartTv
 
-Info:
+&nbsp;<br>
+[
+    ![Open source](
+        https://img.shields.io/badge/Open%20Source-Yes-green?style=plastic
+    )
+    ](
+        https://github.com/dannyvanlierop/NodeJS_HarmanKardon-AVR-API
+    )
+[
+    ![License: Mit](
+        https://img.shields.io/badge/license-MIT-green.svg?style=plastic)
+    ](
+        https://en.wikipedia.org/wiki/MIT_License
+    )
+[
+    ![Contributors](
+        https://img.shields.io/github/contributors/dannyvanlierop/NodeJS_HarmanKardon-AVR-API?style=plastic)
+    ](
+        https://github.com/dannyvanlierop/NodeJS_HarmanKardon-AVR-API/graphs/contributors
+    )
+[
+    ![Forks](
+        https://img.shields.io/github/forks/dannyvanlierop/NodeJS_HarmanKardon-AVR-API?style=plastic)
+    ](
+        https://github.com/dannyvanlierop/NodeJS_HarmanKardon-AVR-API/network/members
+	)
+[
+    ![Stars](
+        https://img.shields.io/github/stars/dannyvanlierop/NodeJS_HarmanKardon-AVR-API?style=plastic)
+  ](
+        https://github.com/dannyvanlierop/NodeJS_HarmanKardon-AVR-API/stargazers
+	)
+[
+    ![Issues](
+        https://img.shields.io/github/issues/dannyvanlierop/NodeJS_HarmanKardon-AVR-API?style=plastic)
+  ](
+        https://github.com/dannyvanlierop/NodeJS_HarmanKardon-AVR-API/issues
+	)
 
-
+&nbsp;<br>
+## Info:
+<hr>
   Tested on `Harman Kardon AVR (171S/1710S)`
 
 ***
@@ -76,4 +116,11 @@ Todo's:
 ***
 
 
+&nbsp;<br>
+## License:
+<hr>
 
+For more details,
+see the [LICENSES](https://github.com/dannyvanlierop/NodeJS_HarmanKardon-AVR-API/blob/master/LICENSE.md) file.
+
+<br>&nbsp;
